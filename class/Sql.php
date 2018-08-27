@@ -1,5 +1,7 @@
 <?php
+
 class Sql extends PDO {
+
 	private $conn;
 
 	public function __construct(){
@@ -11,13 +13,13 @@ class Sql extends PDO {
 
 		foreach ($parameters as $key => $value) {
 
-			$this->setParam($key, $value);
+			$this->setParam($statment, $key, $value);
 		}
 	}
 
 	private function setParam($statment, $key, $value){
 
-		$statment->bindParam($key, $value);
+		$statement->bindParam($key, $value);
 	}
 
 
@@ -31,7 +33,6 @@ class Sql extends PDO {
 
 		return $stmt;
 
-
 		}
 
 		public function select($rawQuery, $params = array()):array
@@ -39,8 +40,10 @@ class Sql extends PDO {
 
 			$stmt = $this->query($rawQuery, $params);
 
-			return $stmt->fetchAll(POD::FETCH_ASSOC);
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 		}
 	}
 }
+
+?>
